@@ -10,6 +10,13 @@ python = "^3.8"
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"
 black = "^21.9b0"
+mypy = "^0.910"
+isort = "^5.6.4"
+
+[tool.black]
+line-length = 120
+target_version = ['py38']
+include = '\.py$'
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel"]
