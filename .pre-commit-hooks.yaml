@@ -1,7 +1,7 @@
-- id: do-not-add-strings
-  name: Do not add strings
+- id: check-forbidden-strings
+  name: Check forbidden strings
   description: Forbids commits if any of the specified strings exists.
   language: python
-  entry: python check_do_not_add.py
+  entry: python check_forbidden_strings.py
   pass_filenames: false
   exclude: ".pre-commit-config.yaml"
