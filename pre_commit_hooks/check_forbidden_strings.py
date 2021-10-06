@@ -13,9 +13,10 @@ def err(s: str) -> None:
     print(s, file=sys.stderr)
 
 def main():
+
     if len(sys.argv[1:]):
         res = subprocess.run(
-            ["git", "grep", "-Hn", "--no-index", "-E", "|".join(sys.argv[1:])],
+            ["git", "grep", "-Hn", "--no-index", "-E", "|".join(sys.argv[1:]), ':(exclude).pre-commit-config.yaml'],
             capture_output=True,
         )
 
@@ -27,7 +28,6 @@ def main():
             err(f"Error invoking grep on {', '.join(sys.argv[1:])}:")
             err(res.stderr.decode("utf-8"))
             sys.exit(2)
-
 
 if __name__ == '__main__':
     exit(main())
