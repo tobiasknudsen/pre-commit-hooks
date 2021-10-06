@@ -3,5 +3,5 @@
   description: Forbids commits if any of the specified strings exists.
   language: python
   entry: check_forbidden_strings
-  pass_filenames: false
   exclude: ".pre-commit-config.yaml"
+  files: ".*"
