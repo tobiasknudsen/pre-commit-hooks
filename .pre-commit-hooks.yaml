@@ -2,4 +2,5 @@
   name: Check forbidden strings
   description: Forbids commits if any of the specified strings exists.
   language: python
+  exclude: .pre-commit-config.yaml
   entry: check_forbidden_strings
