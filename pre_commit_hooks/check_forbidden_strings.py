@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--strings", dest="strings", type=str, nargs="+", help="Strings to search for")
+parser.add_argument("-s", "--string", dest="string", action="append", help="The strings to search for")
 parser.add_argument("files", nargs=argparse.REMAINDER)
 
 
@@ -25,14 +25,15 @@ def err(s: str) -> None:
 def main():
     """Find any occurence of the specified strings in the specified files."""
     args = parser.parse_args()
-    strings = ",".join(args.strings).split(",")
+    if not args.string:
+        return
     res = subprocess.run(
-        ["git", "grep", "-Hn", "--no-index", "-E", "|".join(strings), *args.files],
+        ["git", "grep", "-Hn", "--color", "--no-index", "-E", "|".join(args.string), *args.files],
         capture_output=True,
     )
 
     if res.returncode == 0:
-        err("Error: Unwanted string(s) was found!")
+        err("Error: Unwanted string(s) was found!\n")
         err(res.stdout.decode("utf-8"))
         sys.exit(1)
     elif res.returncode == 2:
