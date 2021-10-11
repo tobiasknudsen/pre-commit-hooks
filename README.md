@@ -22,5 +22,5 @@ Add this to your `.pre-commit-config.yaml`
 #### `check-forbidden-strings`
 
 Prevent commit if specific provided strings exists in the staged files.
-    - Pass the forbidden strings in `args: [-string=do not commit, -s=local_testing_variable]`.
-    - Supports regular expressions.
+  - Pass the forbidden strings in `args: [-string=do not commit, -s=local_testing_variable]`.
+  - Supports regular expressions.
