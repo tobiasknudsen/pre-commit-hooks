@@ -28,7 +28,7 @@ def main():
     if not args.string:
         return
     res = subprocess.run(
-        ["git", "grep", "-Hn", "--color", "--no-index", "-E", "|".join(args.string), *args.files],
+        ["git", "grep", "-Hn", "--color", "--no-index", "-P", "|".join(args.string), *args.files],
         capture_output=True,
     )
 
