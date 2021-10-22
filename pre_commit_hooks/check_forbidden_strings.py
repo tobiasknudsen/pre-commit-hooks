@@ -23,7 +23,7 @@ def err(s: str) -> None:
 
 
 def main():
-    """Find any occurence of the specified strings in the specified files."""
+    """Find any occurence of the specified strings in the specified files. Supports regex"""
     args = parser.parse_args()
     if not args.string:
         return
