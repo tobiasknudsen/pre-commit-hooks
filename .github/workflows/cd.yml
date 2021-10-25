@@ -8,7 +8,7 @@ on:
 
 jobs:
   Pull-Request:
-    if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore(release):')
+    if: github.event_name == 'pull_request' && !contains(github.event.head_commit.message, 'chore(release):')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v2
