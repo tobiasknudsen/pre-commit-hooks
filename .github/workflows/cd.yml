@@ -40,8 +40,8 @@ jobs:
           script: |
             const output = `#### New release 🚀
             Merging this Pull request will create a new release.
-            #### Current version: \`${{ process.env.CURRENT_VERSION }}\`
-            #### New version: \`${{ process.env.NEW_VERSION }}\`
+            #### Current version: \`${{ env.CURRENT_VERSION }}\`
+            #### New version: \`${{ env.NEW_VERSION }}\`
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
 
