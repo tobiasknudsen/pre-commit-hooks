@@ -28,8 +28,9 @@ jobs:
           new_version=$(semantic-release print-version)
           echo "::set-output name=current_version::$current_version"
           echo "::set-output name=new_version::$new_version"
-      - name: Update Pull Request
+      - name: Update Pull Request with new version
         uses: actions/github-script@0.9.0
+        if: "steps.version.outputs.new_version != ''"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -37,6 +38,24 @@ jobs:
             Merging this Pull request will create a new release.
             #### Current version: \`${{ steps.version.outputs.current_version }}\`
             #### New version: \`${{ steps.version.outputs.new_version }}\`
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+      - name: Update Pull Request without new version
+        uses: actions/github-script@0.9.0
+        if: "steps.version.outputs.new_version == ''"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### No release
+            Merging this Pull request will not create a new release, but stay on the current version.
+            #### Current version: \`${{ steps.version.outputs.current_version }}\`
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
 
@@ -63,3 +82,5 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           semantic-release publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
