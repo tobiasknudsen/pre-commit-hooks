@@ -7,6 +7,45 @@ on:
     branches: [ main ]
 
 jobs:
+  Pull-Request:
+    if: github.event_name == 'pull_request' && !contains(github.event.head_commit.message, 'chore(release):')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Semantic version
+        id: version
+        run: |
+          pip install python-semantic-release
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          current_version=$(semantic-release print-version --current)
+          new_version=$(semantic-release print-version)
+          echo "::set-output name=current_version::$current_version"
+          echo "::set-output name=new_version::$new_version"
+      - name: Update Pull Request
+        uses: actions/github-script@0.9.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### New release 🚀
+            Merging this Pull request will create a new release.
+            #### Current version: \`${{ steps.version.outputs.current_version }}\`
+            #### New version: \`${{ steps.version.outputs.new_version }}\`
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
   Release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore(release):')
     runs-on: ubuntu-latest
