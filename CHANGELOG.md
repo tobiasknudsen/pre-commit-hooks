@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.3 (2021-10-25)
+### Fix
+* Empty test commit to bump version to 0.1.3 ([`a6e8846`](https://github.com/tobiasknudsen/pre-commit-hooks/commit/a6e88465c8db7bcbf9a526cedfb86077ce455d86))
+
 ## v0.1.2 (2021-10-25)
 ### Fix
 * Added config for semantic_release ([`f2e0813`](https://github.com/tobiasknudsen/pre-commit-hooks/commit/f2e08131831714e9bc4006d01a67f8f4084ad377))
