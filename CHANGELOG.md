@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.4 (2021-10-25)
+### Fix
+* Empty test commit ([`3ba6f95`](https://github.com/tobiasknudsen/pre-commit-hooks/commit/3ba6f95e9a8c3cdced5ab79f9d9cbc04cf9661a9))
+
 ## v0.1.3 (2021-10-25)
 ### Fix
 * Empty test commit to bump version to 0.1.3 ([`a6e8846`](https://github.com/tobiasknudsen/pre-commit-hooks/commit/a6e88465c8db7bcbf9a526cedfb86077ce455d86))
